@@ -13,10 +13,17 @@ stages:
   - publishImageConfig:
       dockerfilePath: ./Dockerfile
       buildContext: .
-      tag: awcloud/devopsdemo
+      tag: awcloud/devopsdemo:${CICD_EXECUTION_SEQUENCE}
 - name: Deploy
   steps:
   - applyYamlConfig:
       path: ./deploy/deployment-dev.yaml
+  - applyYamlConfig:
+      path: ./deploy/deployment-stag.yaml
+  - applyYamlConfig:
+      path: ./deploy/deployment-prod.yaml
+    when:
+      branch: master
+      event: push
 timeout: 60
 notification: {}
