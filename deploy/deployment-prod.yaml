@@ -30,7 +30,6 @@ spec:
     spec:
       imagePullSecrets:
         - name: pipeline-docker-registry
-      nodeName: solda
       containers:
         - name: devopsdemo-service
           image: ${CICD_IMAGE}:${CICD_EXECUTION_SEQUENCE}

@@ -12,5 +12,6 @@ export interface MongoConfig {
 
 export interface KafkaConfig {
   clientId?: string,
+  prefix?: string,
   brokerUris?: string[],
 }

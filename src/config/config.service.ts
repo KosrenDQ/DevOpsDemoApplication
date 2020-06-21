@@ -18,8 +18,9 @@ export class ConfigService {
     // Create kafka configuration
     const kafka: KafkaConfig = {}
     kafka.clientId = 'demo';
+    kafka.prefix = process.env.KAFKA_PREFIX || 'local';
     const kafkaHost = process.env.KAFKA_HOST || 'localhost';
-    const kafkaPort = process.env.KAFKA_PORT || '9092';
+    const kafkaPort = process.env.KAFKA_PORT || '9093';
     kafka.brokerUris = [ `${kafkaHost}:${kafkaPort}` ];
 
     // Create service configuration
