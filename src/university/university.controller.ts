@@ -1,31 +1,26 @@
-import { Controller, Get, Param, OnModuleInit, Inject } from '@nestjs/common';
+import { Controller, Get, Param, Inject, UseGuards } from '@nestjs/common';
+import { ClientKafka } from '@nestjs/microservices';
+
 import { University } from './university.schema';
 import { UniversityService } from './university.service';
 import { MongoIdPipe } from 'src/util/mongoId.pipe';
-import { ClientKafka } from '@nestjs/microservices';
 import { KafkaTopic } from 'src/util/kafkaTopic.decorator';
 import { CreateUniversityCommand } from './commands/CreateUniversity.command';
 import { Command } from 'src/util/command.decorator';
+import { Roles } from 'src/auth/auth.decorator';
+import { RoleGuard } from 'src/auth/auth.guard';
 
 @Controller('university')
-export class UniversityController implements OnModuleInit {
+@UseGuards(RoleGuard)
+export class UniversityController {
   constructor(
     @Inject('KAFKA_SERVICE') private kafkaClient: ClientKafka,
     private universityService: UniversityService,
   ) { }
 
-  async onModuleInit() {
-    await this.kafkaClient.connect();
-    this.kafkaClient.emit('local-university', {
-      id: '1',
-      type: 'CreateUniversity',
-      timestamp: Date.now(),
-      address: 'Wilhelmshöher Alle 73',
-    });
-  }
-
   // ------------ REST ------------
   @Get('')
+  @Roles('read')
   async getAll(): Promise<University[]> {
     return this.universityService.findAll();
   }

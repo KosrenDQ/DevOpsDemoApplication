@@ -1,4 +1,4 @@
-import { createParamDecorator, ExecutionContext, BadRequestException } from "@nestjs/common";
+import { createParamDecorator, ExecutionContext, BadRequestException } from '@nestjs/common';
 
 export const Command = createParamDecorator(
   (data: unknown, ctx: ExecutionContext) => {

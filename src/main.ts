@@ -4,14 +4,18 @@ import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 
 import { AppModule } from './app.module';
 import { ConfigService } from './config/config.service';
+import { LoggingService } from './logging/logging.service';
 
 async function bootstrap() {
-  const configService: ConfigService = new ConfigService();
-  const config = configService.getConfig();
+  const app = await NestFactory.create(AppModule, { logger: false });
 
-  const app = await NestFactory.create(AppModule);
+  const configService: ConfigService = app.get(ConfigService);
+  const config = configService.getConfig();
+  const logger: LoggingService = app.get(LoggingService);
+
   app.enableCors();
   app.useGlobalPipes(new ValidationPipe());
+  app.useLogger(logger);
   app.setGlobalPrefix(config.prefix);
 
   app.connectMicroservice<MicroserviceOptions>({
@@ -22,12 +26,15 @@ async function bootstrap() {
         brokers: config.kafka.brokerUris,
       },
       consumer: {
-        groupId: `${config.kafka.clientId}-consumer`
+        groupId: `${config.kafka.prefix}-${config.kafka.clientId}-consumer`
       }
     }
   });
 
   await app.startAllMicroservicesAsync();
   await app.listen(config.port);
+
+  logger.log(`University service running on port ${config.port}`);
+  logger.warn('Ui blyat');
 }
 bootstrap();

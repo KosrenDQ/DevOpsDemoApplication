@@ -33,6 +33,13 @@ spec:
       containers:
         - name: devopsdemo-service
           image: ${CICD_IMAGE}:${CICD_EXECUTION_SEQUENCE}
+          env: 
+            - name: KAFKA_PREFIX
+              value: dev
+            - name: KAFKA_HOST
+              value: kafka.kafka
+            - name: KAFKA_PORT
+              value: '9094'
           envFrom:
             - secretRef:
                 name: devopsdemo-dev

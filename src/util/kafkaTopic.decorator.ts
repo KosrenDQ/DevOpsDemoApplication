@@ -1,5 +1,6 @@
-import { ConfigService } from "src/config/config.service";
-import { Transport } from "@nestjs/microservices";
+import { Transport } from '@nestjs/microservices';
+
+import { ConfigService } from 'src/config/config.service';
 
 const PATTERN_METADATA = 'microservices:pattern';
 const TRANSPORT_METADATA = 'microservices:transport';
@@ -7,10 +8,10 @@ const PATTERN_HANDLER_METADATA = 'microservices:handler_type';
 
 export const KafkaTopic = (metadata?: string): MethodDecorator => {
   return (
-    target: any,
+    target: unknown,
     key: string | symbol,
     descriptor: PropertyDescriptor,
-  ) => {
+  ): PropertyDescriptor => {
     const configService: ConfigService = new ConfigService();
     const config = configService.getConfig().kafka;
 
