@@ -33,7 +33,7 @@ spec:
       containers:
         - name: devopsdemo-service
           image: ${CICD_IMAGE}:${CICD_EXECUTION_SEQUENCE}
-            env: 
+          env: 
             - name: KAFKA_PREFIX
               value: prod
             - name: KAFKA_HOST
