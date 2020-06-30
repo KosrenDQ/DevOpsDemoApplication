@@ -1,5 +1,4 @@
 import { NestFactory } from '@nestjs/core';
-import { ValidationPipe } from '@nestjs/common';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 
 import { AppModule } from './app.module';
@@ -7,14 +6,13 @@ import { ConfigService } from './config';
 import { LoggingService } from './logging';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, { logger: false });
+  const app = await NestFactory.create(AppModule, { logger: true });
 
   const configService: ConfigService = app.get(ConfigService);
   const config = configService.getConfig();
   const logger: LoggingService = app.get(LoggingService);
 
   app.enableCors();
-  app.useGlobalPipes(new ValidationPipe());
   app.useLogger(logger);
   app.setGlobalPrefix(config.prefix);
 

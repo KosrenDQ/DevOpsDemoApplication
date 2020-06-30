@@ -1,7 +1,7 @@
 import { Injectable, NestMiddleware, Inject, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 
-import { NextFunction } from 'express';
+import { NextFunction, Response } from 'express';
 
 import { Config } from '../config';
 import { ExtendedRequest } from './auth.interface';

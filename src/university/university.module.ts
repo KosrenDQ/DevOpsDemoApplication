@@ -5,6 +5,8 @@ import { UniversityController } from './university.controller';
 import { UniversitySchema } from './university.schema';
 import { LoggingModule } from '../logging';
 import { UniversityService } from './university.service';
+import { CommandHandler } from './commands/command.handler';
+import { EventHandler } from './dto/event.handler';
 
 @Module({
   imports: [
@@ -13,6 +15,8 @@ import { UniversityService } from './university.service';
   ],
   controllers: [UniversityController],
   providers: [
+    CommandHandler,
+    EventHandler,
     UniversityService,
   ]
 })
