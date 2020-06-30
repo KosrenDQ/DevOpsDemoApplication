@@ -3,6 +3,10 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 import { UniversityController } from './university.controller';
 import { UniversityService } from './university.service';
+import { LoggingModule } from '../logging';
+import { ConfigModule } from '../config';
+import { CommandHandler } from './commands/command.handler';
+import { EventHandler } from './dto/event.handler';
 
 describe('University Controller', () => {
   function mockUniversityModel(dto: any) {
@@ -22,8 +26,14 @@ describe('University Controller', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
+      imports: [
+        ConfigModule.forRoot(),
+        LoggingModule,
+      ],
       controllers: [UniversityController],
       providers: [
+        CommandHandler,
+        EventHandler,
         UniversityService,
         {
           provide: 'KAFKA_SERVICE',
