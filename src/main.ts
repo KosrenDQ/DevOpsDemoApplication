@@ -3,8 +3,8 @@ import { ValidationPipe } from '@nestjs/common';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 
 import { AppModule } from './app.module';
-import { ConfigService } from './config/config.service';
-import { LoggingService } from './logging/logging.service';
+import { ConfigService } from './config';
+import { LoggingService } from './logging';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, { logger: false });
@@ -35,6 +35,5 @@ async function bootstrap() {
   await app.listen(config.port);
 
   logger.log(`University service running on port ${config.port}`);
-  logger.warn('Ui blyat');
 }
 bootstrap();

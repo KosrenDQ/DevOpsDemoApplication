@@ -3,8 +3,8 @@ import { JwtService } from '@nestjs/jwt';
 
 import { NextFunction } from 'express';
 
+import { Config } from '../config';
 import { ExtendedRequest } from './auth.interface';
-import { Config } from 'src/config/config.interface';
 
 
 @Injectable()
@@ -16,7 +16,7 @@ export class AuthMiddleware implements NestMiddleware {
     private jwtService: JwtService,
   ) { }
 
-  use(req: ExtendedRequest, res: Response, next: NextFunction) {
+  use(req: ExtendedRequest, res: Response, next: NextFunction): void {
     const algorithms = this.config.auth.algorithms as any[];
     const issuer = this.config.auth.issuer;
     const authHeader: string[] = req.headers.authorization ? req.headers.authorization.split(' ') : [''];

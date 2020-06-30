@@ -3,10 +3,8 @@ import { MongooseModule } from '@nestjs/mongoose';
 
 import { UniversityController } from './university.controller';
 import { UniversitySchema } from './university.schema';
-import { LoggingModule } from './../logging/logging.module';
+import { LoggingModule } from '../logging';
 import { UniversityService } from './university.service';
-
-
 
 @Module({
   imports: [

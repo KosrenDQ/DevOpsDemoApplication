@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 
-import { University } from './university.schema';
 import { Model } from 'mongoose';
+
+import { University } from './university.schema';
 
 @Injectable()
 export class UniversityService {

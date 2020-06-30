@@ -3,10 +3,9 @@ import { JwtModule } from '@nestjs/jwt';
 import { MongooseModule } from '@nestjs/mongoose';
 
 import { UniversityModule } from './university/university.module';
-import { ConfigModule } from './config/config.module';
-import { ConfigService } from './config/config.service';
-import { AuthMiddleware } from './auth/auth.middleware';
-import { KafkaModule } from './kafka/kafka.module';
+import { ConfigModule, ConfigService } from './config';
+import { AuthMiddleware } from './auth';
+import { KafkaModule } from './kafka';
 
 @Module({
   imports: [

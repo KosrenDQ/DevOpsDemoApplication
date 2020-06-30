@@ -1,6 +1,8 @@
 import { CanActivate, ExecutionContext, UnauthorizedException } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 
+import { User } from './auth.interface';
+
 export class RoleGuard implements CanActivate {
   constructor(private reflector: Reflector) {}
 
@@ -11,7 +13,7 @@ export class RoleGuard implements CanActivate {
       return true;
     }
     const request = ctx.switchToHttp().getRequest();
-    const user = request.user;
+    const user: User = request.user;
     const hasRoles = () => {
       const r = !!user.roles.find((role) => !!expectedRoles.find((item) => item === role));
       const rr = !!user.resourceRoles.find((role) => !!expectedRoles.find((item) => item === role));

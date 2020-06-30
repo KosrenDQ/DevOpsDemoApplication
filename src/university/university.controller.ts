@@ -3,12 +3,10 @@ import { ClientKafka } from '@nestjs/microservices';
 
 import { University } from './university.schema';
 import { UniversityService } from './university.service';
-import { MongoIdPipe } from '../util/mongoId.pipe';
-import { KafkaTopic } from '../util/kafkaTopic.decorator';
+import { MongoIdPipe } from '../pipe/mongoId.pipe';
+import { Command, KafkaTopic } from '../kafka';
 import { CreateUniversityCommand } from './commands/CreateUniversity.command';
-import { Command } from '../util/command.decorator';
-import { Roles } from '../auth/auth.decorator';
-import { RoleGuard } from '../auth/auth.guard';
+import { Roles, RoleGuard } from '../auth';
 
 @Controller('university')
 @UseGuards(RoleGuard)
