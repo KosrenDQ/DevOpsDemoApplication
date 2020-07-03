@@ -2,10 +2,10 @@ stages:
 - name: Test
   steps:
   - runScriptConfig:
-      image: node:12-alpine
+      image: node:latest
       shellScript: |-
         npm install
-        npm audit
+        npm audit --audit-level=moderate
         npm run lint
         npm run test
 - name: Publish
