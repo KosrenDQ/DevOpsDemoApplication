@@ -2,7 +2,7 @@ stages:
 - name: Test
   steps:
   - runScriptConfig:
-      image: node:latest
+      image: node:12-alpine
       shellScript: |-
         npm install
         npm audit
