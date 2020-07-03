@@ -6,7 +6,7 @@ import { UniversityService } from './university.service';
 import { LoggingModule } from '../logging';
 import { ConfigModule } from '../config';
 import { CommandHandler } from './commands/command.handler';
-import { EventHandler } from './dto/event.handler';
+import { EventHandler } from './events/event.handler';
 
 describe('University Controller', () => {
   function mockUniversityModel(dto: any) {

@@ -13,7 +13,7 @@ import { CreateUniversityDto } from './dto/createUniversity.dto';
 import { Config } from 'src/config';
 import { CommandHandler } from './commands/command.handler';
 import { Event } from './events/event';
-import { EventHandler } from './dto/event.handler';
+import { EventHandler } from './events/event.handler';
 
 @Controller('university')
 @UseGuards(RoleGuard)

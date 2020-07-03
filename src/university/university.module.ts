@@ -6,7 +6,7 @@ import { UniversitySchema } from './university.schema';
 import { LoggingModule } from '../logging';
 import { UniversityService } from './university.service';
 import { CommandHandler } from './commands/command.handler';
-import { EventHandler } from './dto/event.handler';
+import { EventHandler } from './events/event.handler';
 
 @Module({
   imports: [
