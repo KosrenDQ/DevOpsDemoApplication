@@ -1,8 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { RpcException } from '@nestjs/microservices';
 
-import { plainToClass } from 'class-transformer';
-
 import { UniversityService } from '../university.service';
 import { University } from '../university.schema';
 import { Event } from '../events/event';
